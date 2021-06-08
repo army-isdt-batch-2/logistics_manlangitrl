@@ -16,7 +16,7 @@ class ReturnController extends Controller
 
     public function index()
     {
-       $data=Returns::get();
+       $data=Returns::with('asset')->get();
         return view('return.index')->with(['data'=>$data]);
     }
 
@@ -37,9 +37,13 @@ class ReturnController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        //    dd($this->request->all());
+        Returns::create(
+            $this->request->except('_token')
+        );
+     return Redirect::route('return.index')->with('success','Asset successfully return.');
     }
 
     /**
@@ -61,7 +65,9 @@ class ReturnController extends Controller
      */
     public function edit($id)
     {
-        //
+        $assets=Asset::select('name','id')->get();
+        $data=Returns::find($id);
+        return view('return.edit')->with(['data'=>$data,'assets'=>$assets]);
     }
 
     /**
@@ -71,9 +77,12 @@ class ReturnController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        //
+        Returns::find($id)->update(
+            $this->request->except('_token')
+       );
+         return Redirect::route('return.index')->with('success','Asset successfully returned.');
     }
 
     /**
@@ -84,6 +93,8 @@ class ReturnController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Returns::find($id)->delete();
+        return Redirect::route('return.index')->with('error','Return successfully deleted.');
+   
     }
 }

@@ -14,4 +14,9 @@ class Returns extends Model
     'returned_by_contact',
     'quantity',
     'reason'];
+
+    public function asset()
+    {
+        return $this->belongsTo(Asset::class);
+    }
 }

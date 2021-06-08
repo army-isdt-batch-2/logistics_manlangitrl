@@ -34,5 +34,10 @@ class Asset extends Model
         return $this->hasOne(Distribution::class,'distribution_id');
     }
 
+    public function return()
+    {
+        return $this->hasOne(Returns::class,'asset_id');
+    }
+
 
 }

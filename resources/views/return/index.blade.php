@@ -38,18 +38,19 @@
                         </thead>
                         <tbody>
                             
-                            @foreach($data as $key=> $supplier)
+                            @foreach($data as $key=> $return)
                             <tr>
                                 <th scope="col">{{++$key}}</th>
-                                <th scope="col">{{  $supplier->name}}</th>
-                                <th scope="col">{{  $supplier->address}}</th>
-                                <th scope="col">{{  $supplier->contact_person}}</th>
-                                <th scope="col">{{  $supplier->category}}</th>
+                                <th scope="col">{{  $return->asset->name}}</th>
+                                <th scope="col">{{  $return->returned_by}}</th>
+                                <th scope="col">{{  $return->returned_by_contact}}</th>
+                                <th scope="col">{{  $return->quantity}}</th>
+                                <th scope="col">{{  $return->reason}}</th>
                                 <th scope="col">
-                                    <form action="{{ route('supplier.destroy', $supplier->id) }}" method="post">
+                                    <form action="{{ route('return.destroy', $return->id) }}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <a type="button" href="{{ route('supplier.edit', $supplier->id) }}" class="btn btn-success btn-sm">Edit</a>
+                                        <a type="button" href="{{ route('return.edit', $return->id) }}" class="btn btn-success btn-sm">Edit</a>
                                         <button type="button" class="btn btn-danger  btn-sm" onclick="confirm('{{ __("Are you sure you want to delete this?") }}') ? this.parentElement.submit() : ''">Delete</button>
                          
                                     </form>

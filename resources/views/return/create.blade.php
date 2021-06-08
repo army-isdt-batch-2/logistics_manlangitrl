@@ -22,31 +22,30 @@
                 <div class="col-12">
                     <form action="{{route('return.store')}}" method="post" class="row g-3">
                         @csrf
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <label for="name" class="form-label">Asset</label>
-                            <select name="asset_id" class="form-control">
-                            <option value=""selected>--select asset--</option>
+                            <select name="asset_id" class="form-control" required>
+                            <option value="" selected>--select asset--</option>
                             @foreach($assets as $asset)
                             <option value="{{$asset->id}}">{{$asset->name}}</option>
                             @endforeach
                             </select>
                         </div>
-                        <div class="col-md-4">
-                            <label for="name" class="form-label">Contact</label>
-                            <input type="number" class="form-control" name="contact" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="name" class="form-label">Address</label>
-                            <input type="text" class="form-control" name="address" required>
+                        <div class="col-md-6">
+                            <label for="name" class="form-label">Return By</label>
+                            <input type="text" class="form-control" name="returned_by" required>
                         </div>
                         <div class="col-md-6">
-                            <label for="name" class="form-label">Contact Person</label>
-                         <input type="text" class="form-control" name="contact_person"
-                          required>
+                            <label for="name" class="form-label">Return By Contact</label>
+                            <input type="number" class="form-control" name="returned_by_contact" required>
                         </div>
                         <div class="col-md-6">
-                            <label for="name" class="form-label">Category</label>
-                            <input type="text" class="form-control" name="category" required>
+                            <label for="name" class="form-label">Quantity</label>
+                         <input type="number" class="form-control" name="quantity" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="name" class="form-label">Reason</label>
+                            <textarea type="text" class="form-control" name="reason" required></textarea>
                         </div>
 
                         <div class="col-12">
