@@ -48,6 +48,9 @@
             <div class="col-4">
                 <canvas id="total_asset" width="100px" height="100px"></canvas>
             </div>
+            <div class="col-4">
+                <canvas id="return_asset" width="100px" height="100px"></canvas>
+            </div>
         
         </div>
     </div>
@@ -98,7 +101,46 @@
             }
         });
 
-    
+        var myChart = new Chart(document.getElementById('return_asset').getContext('2d'),{
+            type: 'bar',
+            data: {
+                labels: [
+                    @json($data['return']['asset'] )
+                
+                ],
+                datasets: [{
+                    label: 'Return Assets',
+
+                    data: [
+                        @json($data['return']['asset'] )
+                      
+                    ],
+                    backgroundColor: [
+                        'green',
+                        'blue',
+                        
+
+                        
+                    ],
+                    borderColor: [
+                        'green',
+                        'blue',
+                       
+                        
+                       
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
 </script>
 
 @endsection

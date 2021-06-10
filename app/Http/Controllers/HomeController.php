@@ -7,6 +7,7 @@ use App\Models\Asset;
 use App\Models\Supplier;
 use App\Models\Storage;
 use App\Models\Distribution;
+use App\Models\Returns;
 
 
 class HomeController extends Controller
@@ -32,11 +33,20 @@ class HomeController extends Controller
                 'distributed'=>Distribution::whereStatus('distributed')->sum('quantity'),
                 'processing'=>Distribution::whereStatus('processing')->sum('quantity'),
                 'declined'=>Distribution::whereStatus('declined')->sum('quantity'),
-            ]
+            ],
+
+            'return'=>[
+                
+                    'asset'=>Returns::select('name')
+                    ->leftJoin("assets", "assets.id", "=", "returns.asset_id")
+                    ->get()
+                    ->pluck('name') ->toArray(),
+              
+                ]  
 
            ];
        
-            // dd($data);
+            // dd($data['return']['asset']);
 
         return view ('dashboard')->with(['data'=>$data]);
     }
