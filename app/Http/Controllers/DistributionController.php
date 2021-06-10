@@ -28,7 +28,7 @@ class DistributionController extends Controller
     public function create()
     {
         $assets=Asset::select('name','id')->get();
-
+        // dd( $assets);
        return view('distribution.create')->with(['assets'=>$assets]);
     }
 
@@ -41,10 +41,29 @@ class DistributionController extends Controller
     public function store()
     {
         //    dd($this->request->all());
-        Distribution::create(
-            $this->request->except('_token')
-        );
-     return Redirect::route('distribution.index')->with('success','Asset successfully distributed.');
+        $asset=Asset::find($this->request->asset_id);
+        if($asset->total_stocks >= $this->request->quantity){
+
+            $data= Distribution::create(
+                $this->request->except('_token')
+            );
+            
+            if($data->status=='distributed'){
+                $total_stock= $asset->total_stocks - $data->quantity;
+                $asset->update(['total_stocks' =>  $total_stock]);
+
+            }
+
+
+            return Redirect::route('distribution.index')->with('success','Asset successfully distributed.');
+
+        }
+        else{
+
+            return Redirect::route('distribution.index')->with('error','Asset out of stocks !.');
+
+        }
+        
     }
 
     /**
@@ -81,11 +100,32 @@ class DistributionController extends Controller
     public function update($id)
     {
          //    dd($this->request->all());
-         Distribution::find($id)->update(
+         $asset=Asset::find($this->request->asset_id);
+         if($asset->total_stocks >= $this->request->quantity){
+             
+         $data=Distribution::find($id)->update(
             $this->request->except('_token')
        );
-     return Redirect::route('distribution.index')->with('success','Asset successfully distributed.');
+       $data1=Distribution::find($id);
+       if($data1->status=='distributed'){ 
+        $total_stock= $asset->total_stocks - $data1->quantity;
+        $asset->update(['total_stocks' =>  $total_stock]);
+
+       }
+      
+       
+
+
+       return Redirect::route('distribution.index')->with('success','Asset successfully distributed.');
+
+      }else{
+
+        return Redirect::route('distribution.index')->with('error','Asset out of stocks !.');
+
     }
+     
+    }
+    
 
     /**
      * Remove the specified resource from storage.

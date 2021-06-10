@@ -1,14 +1,14 @@
         @if (session('error'))
-        <div class="col-md-12">
-            <span class="alert alert-sm alert-danger">
-        {{ session('error') }}
+        <div class="alert alert-sm alert-danger">
+            <span>
+          {{ session('error') }}
             </span>  
         </div>
-        @endif
+        @endif 
       
         @if (session('success'))
-        <div class="col-md-12">
-            <span class="alert alert-sm alert-success">
+        <div class="alert alert-sm alert-success">
+           <span>
         {{ session('success') }}
             </span>  
         </div>

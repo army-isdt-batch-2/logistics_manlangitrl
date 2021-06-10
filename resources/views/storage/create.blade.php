@@ -13,14 +13,14 @@
                     </h4>
                 </div>
                 <div class="col-2 text-end">
-                    <a href="{{route('storage.index')}}" class="btn btn-warning pull-right">Back</a>
+                    <a href="{{route('storages.index')}}" class="btn btn-warning pull-right">Back</a>
                 </div>
                 <div class="col-12">
                     <hr>
                 </div>
 
                 <div class="col-12">
-                    <form action="{{route('storage.store')}}" method="post" class="row g-3">
+                    <form action="{{route('storages.store')}}" method="post" class="row g-3">
                         @csrf
                         
                         <div class="col-md-6">
