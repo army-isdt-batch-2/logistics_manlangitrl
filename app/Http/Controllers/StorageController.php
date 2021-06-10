@@ -16,7 +16,7 @@ class StorageController extends Controller
     public function index()
     {
        $data=Storage::get();
-        return view('storage.index')->with(['data'=>$data]);
+        return view('storages.index')->with(['data'=>$data]);
     }
 
     /**
@@ -26,7 +26,7 @@ class StorageController extends Controller
      */
     public function create()
     {
-        return view('storage.create');
+        return view('storages.create');
 
     }
 
@@ -42,7 +42,7 @@ class StorageController extends Controller
         Storage::create(
                 $this->request->except('_token')
             );
-         return Redirect::route('storage.index')->with('success','Storage successfully added.');
+         return Redirect::route('storages.index')->with('success','Storage successfully added.');
     }
 
     /**
@@ -65,7 +65,7 @@ class StorageController extends Controller
     public function edit($id)
     {
         $data=Storage::find($id);
-        return view('storage.edit')->with(['data'=>$data]);
+        return view('storages.edit')->with(['data'=>$data]);
     }
 
     /**
@@ -80,7 +80,7 @@ class StorageController extends Controller
         Storage::find($id)->update(
             $this->request->except('_token')
        );
-         return Redirect::route('storage.index')->with('success','Storage successfully updated.');
+         return Redirect::route('storages.index')->with('success','Storage successfully updated.');
    
     }
 
@@ -93,7 +93,7 @@ class StorageController extends Controller
     public function destroy($id)
     {
         Storage::find($id)->delete();
-        return Redirect::route('storage.index')->with('error','Storage successfully deleted.');
+        return Redirect::route('storages.index')->with('error','Storage successfully deleted.');
    
         
     }
